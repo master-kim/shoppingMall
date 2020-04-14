@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="manager_db">
+	<!-- 글작성 -->
+	
+	<insert id="add_content" parameterType="com.jica.springshoppingmall.beans.ProductBean">
+		insert into jica8_product_table 
+			(product_idx, product_status, product_image_file,product_name,
+			 product_price,product_info, product_category_idx)
+		VALUES(JICA8_PRODUCT_SEQ.nextval, 1, #{product_image_file},
+ 				#{product_name}, #{product_price},#{product_info}, #{product_category_idx})
+	</insert>
+	
+	
+	<!-- 유저 리스트 가져오기 -->
+	<!-- 크냐 작냐와 같은 연산자를 사용할 때 는 xml에서 제공하는 CDATA 형태로 작성한다. -->
+	<select id="get_user_list" parameterType="map" resultType="com.jica.springshoppingmall.beans.UserBean">
+		<![CDATA[ 
+		select * from 
+		(select rownum as row_idx, r1.* from (
+		
+		select *
+		from jica8_user_table
+		order by user_idx desc
+		
+		) r1) r2
+	    where r2.row_idx  >= #{min} and r2.row_idx <= #{max}
+	    ]]>
+	</select>
+	<!-- 전체 유저의 명수를 가져온다 -->
+	<select id='get_user_cnt' resultType="int">
+		select count(*) from JICA8_USER_TABLE
+	</select>
+	
+	<!-- 유저 등급을 바꾼다. -->
+	<update id="update_grade" parameterType="map">
+		update jica8_user_table 
+			set user_grade = #{user_grade}
+			where user_idx = #{user_idx}
+	</update>
+	<!-- 유저 상태를 바꾼다. -->
+	<update id="update_status" parameterType="map">
+		update jica8_user_table 
+			set user_status = #{user_status}
+			where user_idx = #{user_idx}
+	</update>
+</mapper>

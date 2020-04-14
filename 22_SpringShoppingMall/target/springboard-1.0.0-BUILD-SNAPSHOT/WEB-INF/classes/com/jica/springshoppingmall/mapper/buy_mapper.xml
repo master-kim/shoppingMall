@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="buy_db">
+
+
+	<!-- 전체 상품의 개수 가져오기 -->
+	<select id='cart_cnt' resultType="int">
+		select count(*) from JICA8_CART_TABLE
+	</select>
+	
+	<!-- 장바구니 리스트 가져오기 -->
+	<!-- 크냐 작냐와 같은 연산자를 사용할 때 는 xml에서 제공하는 CDATA 형태로 작성한다. -->
+	<select id="cart_list" parameterType="map" resultType="com.jica.springshoppingmall.beans.CartBean">
+		<![CDATA[ 
+		select * from 
+		(select rownum as row_idx, r1.* from (
+		
+		select a2.cart_idx , a1.product_name as cart_product_name , a2.cart_product_idx
+				,to_char(a2.cart_date, 'YYYY-MM-DD') as cart_date , a2.cart_cnt 
+				, a2.cart_total_price , a2.cart_price
+	    from JICA8_product_TABLE a1, jica8_cart_table a2
+		where a1.product_idx = a2.cart_product_idx 
+		order by cart_idx desc
+			  
+		) r1) r2
+	    where r2.row_idx  >= #{min} and r2.row_idx <= #{max}
+	    ]]>
+	</select> 
+	
+	<!-- 장바구니에 담기 -->
+	<insert id="cart_insert" parameterType="com.jica.springshoppingmall.beans.CartBean" >
+		insert into JICA8_cart_TABLE
+			(CART_IDX , CART_PRODUCT_IDX,  CART_DATE , CART_USER_IDX , cart_cnt , cart_price, cart_total_price )
+		VALUES(JICA8_cart_seq.nextval, #{cart_product_idx} , sysdate, #{cart_user_idx} 
+		, #{cart_cnt},#{cart_price} , #{cart_price}*#{cart_cnt} )
+	</insert>
+	
+	<!-- 장바구니 한개 삭제하기 -->
+	<delete id = 'cart_delete' parameterType="int" >
+		delete from JICA8_cart_TABLE
+		where cart_idx = #{id}
+	</delete>
+	
+	<!--  장바구니 전체 비우기 -->
+	<delete id = 'cart_all_delete' parameterType="com.jica.springshoppingmall.beans.CartBean" >
+		delete from JICA8_cart_TABLE 
+		where cart_user_idx = #{cart_user_idx}
+	</delete>
+
+	
+	<!-- 구매 이력 리스트 가져오기 -->
+	<select id='buy_complete_cnt' resultType="int">
+		select count(*) from JICA8_BUY_COMPLETE_TABLE
+	</select>
+	
+	<!-- 구매이력 리스트 쿼리문 -->
+	<!-- 크냐 작냐와 같은 연산자를 사용할 때 는 xml에서 제공하는 CDATA 형태로 작성한다. -->
+	<select id="buy_complete_list" parameterType="map" resultType="com.jica.springshoppingmall.beans.BuyCompleteBean">
+		<![CDATA[ 
+		 select * from 
+		(select rownum as row_idx, r1.* from (
+		
+		select a2.buy_complete_idx ,  a1.product_name as buy_complete_name, a2.buy_complete_cnt, 
+				to_char(a2.buy_complete_date, 'YYYY-MM-DD') as buy_complete_date
+				,  a2.buy_complete_total_price as buy_complete_total_price
+        
+	    from JICA8_product_TABLE a1, JICA8_BUY_COMPLETE_TABLE a2
+		where a1.PRODUCT_IDX = a2.BUY_COMPLETE_PRODUCT_IDX
+		order by BUY_COMPLETE_IDX desc
+			  
+		) r1) r2
+	      where r2.row_idx  >= #{min} and r2.row_idx <= #{max}
+	    ]]>
+	</select> 
+	
+	<!-- 구매이력에 담기 -->
+	<insert id="buy_insert" parameterType="com.jica.springshoppingmall.beans.BuyCompleteBean" >
+		insert into JICA8_BUY_COMPLETE_TABLE
+			(BUY_COMPLETE_IDX , buy_complete_product_idx,  BUY_COMPLETE_DATE 
+			, BUY_COMPLETE_TOTAL_PRICE , BUY_COMPLETE_CNT , BUY_COMPLETE_PRICE  )
+		VALUES(JICA8_BUY_COMPLETE_seq.nextval, #{buy_complete_product_idx} 
+				, sysdate, #{buy_complete_total_price} , #{buy_complete_cnt} ,
+				 #{buy_complete_price})
+	</insert>
+	
+	<!-- 장바구니에서 구매하고 총금액 가져오기 -->
+	<select id ='cart_buy_sum' parameterType='int' resultType='int'>
+		select  sum(CART_TOTAL_PRICE) as cart_complete_price
+		from jica8_cart_table
+   		where cart_user_idx = #{cart_user_idx}
+	</select>
+	
+	
+	<!-- 장바구니 구매확정 누를시 인설트하기 -->
+	<insert id="cart_complete_insert" parameterType="com.jica.springshoppingmall.beans.BuyCompleteBean" >
+		insert into JICA8_BUY_COMPLETE_TABLE
+			(BUY_COMPLETE_IDX , buy_complete_product_idx,  BUY_COMPLETE_DATE 
+			, BUY_COMPLETE_TOTAL_PRICE , BUY_COMPLETE_CNT , BUY_COMPLETE_PRICE  )
+		VALUES(JICA8_BUY_COMPLETE_seq.nextval, #{buy_complete_product_idx} 
+				, sysdate, #{buy_complete_total_price} , #{buy_complete_cnt} ,
+				 #{buy_complete_price})
+	</insert>
+
+
+</mapper>
+
+
+
+
+
+

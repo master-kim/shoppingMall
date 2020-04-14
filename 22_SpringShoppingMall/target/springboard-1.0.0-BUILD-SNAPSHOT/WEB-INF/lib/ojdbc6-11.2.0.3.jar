@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xml:lang="en" lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Out of Service</title>
+<style>
+#error-page{
+	background: #fff;
+	font-family: Arial, Verdana, sans-serif;
+}
+.supercenter{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 500px;
+	height: 30em;
+	margin-top: -15em;
+	margin-left: -250px;
+}
+#error-page h1{
+	margin-bottom: 30px;
+	font-size: 200%;
+	color: #333366;
+	font-weight: normal;
+	line-height: 100%;
+	font-family: Georgia, Times New Roman, serif;
+	text-align: center;
+}
+#error-page div{
+	font-size: 100%;
+	text-align: center;
+}
+#error-page p{
+	margin-bottom: 25px;
+	font-size: 100%;
+	text-align: center;
+}
+.pf-logo a.ldschurch-logotype {
+	text-decoration: none;
+	min-height: 100px;
+	overflow: hidden;
+	color: #000;
+}
+@font-face {
+	font-family: 'eng';
+	src: url(data:application/font-woff;charset=utf-8;base64,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
+) format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+/* set the wrapper font-size to 100px, so we can use a percentage of that for the various sizes of logos. If you need a bigger/smaller logo just increase/decrease the 100px and all logos will adapt to the correct percentage of that size */
+.ldschurch-logotype,
+a.ldschurch-logotype {
+	font-size: 100px;
+	text-decoration: none;
+	display: inline-block;
+	line-height: 0;
+	vertical-align: middle;
+}
+.lang-eng .ldschurch-logotype:before,
+.ldschurch-logotype:before,
+.lang-eng .ldschurch-logotype--cobranded:after,
+.ldschurch-logotype--cobranded:after {
+	font-family: 'eng';
+	/* yes "important" is evil, but kind of critical for the logo */
+	font-style: normal !important;
+	font-weight: normal !important;
+	line-height: 1;
+	vertical-align: middle;
+	speak: none;
+	/* Better Font Rendering */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.lang-eng .ldschurch-logotype:before,
+.ldschurch-logotype:before {
+	font-size: 92%;
+	font-family: 'eng';
+	speak: none;
+	content: "\e600";
+}
+
+.lang-eng .ldschurch-logotype--cobranded:after,
+.ldschurch-logotype--cobranded:after {
+	font-size: 53%;
+	content: "\e601";
+	opacity: .5;
+}
+.ldschurch-logotype__text {
+	/* accessibly hide text */
+	position: absolute !important;
+	height: 1px; width: 1px;
+	overflow: hidden;
+	clip: rect(1px, 1px, 1px, 1px);
+	font-size: 16px;
+	vertical-align: top;
+	line-height: 130%;
+	display: inline-block;
+	text-align: center;
+}
+</style>
+</head>
+<body id="error-page">
+
+<div class="supercenter">
+	<h1>This website is down for maintenance.</h1>
+	<p>We apologize for the inconvenience. Please come back later.</p>
+	<p><a href="javascript:history.back()">Go Back</a>.</p>
+
+	<p>Please check the URL for proper spelling and capitalization.
+	If you're having trouble locating a page on churchofjesuschrist.org, try visiting
+	<a href="https://www.churchofjesuschrist.org/">churchofjesuschrist.org</a>
+	or enter a search term in the field below.</p>
+	<div id="search">
+		<form accept-charset="utf-8" method="get" action="https://www.churchofjesuschrist.org/search">
+			<input type="hidden" name="lang" value="eng">
+			<span class="search-field"><input type="text" name="query" maxlength="150" class="ac_input"></span>
+			<input type="submit" value="⌕" class="search-button">
+		</form>
+	</div>
+
+	<br>
+	<p><a href="https://www.churchofjesuschrist.org/tools/feedback?lang=eng&amp;body=Error%3ahttps%3a//www.churchofjesuschrist.org/lb">Leave Feedback</a></p>
+	<div class="pf-logo">
+		<a href="https://www.churchofjesuschrist.org/" class="ldschurch-logotype">
+			<span class="ldschurch-logotype__text">The Church of Jesus Christ of Latter-day Saints</span>
+		</a>
+	</div>
+</div>
+</body>
+</html>

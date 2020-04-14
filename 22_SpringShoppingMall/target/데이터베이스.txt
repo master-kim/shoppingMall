@@ -1,0 +1,340 @@
+-- 삭제처리
+drop sequence JICA8_BOARD_MAIN_SEQ;
+drop sequence JICA8_PRODUCT_CATEGORY_SEQ;
+drop sequence JICA8_BOARD_CATEGORY_SEQ;
+drop sequence JICA8_BOARD_INFO_SEQ;
+drop sequence JICA8_BANNER_SEQ;
+drop sequence JICA8_PRODUCT_SEQ;
+drop sequence JICA8_BUY_INFO_SEQ;
+drop sequence JICA8_BUY_PRODUCT_INFO_SEQ;
+drop sequence JICA8_USER_SEQ;
+drop sequence JICA8_CART_SEQ;
+drop sequence JICA8_BOARD_CONTENT_SEQ;
+drop sequence JICA8_ANSWER_SEQ;
+drop sequence JICA8_REPLY_SEQ;
+drop sequence JICA8_BUY_TEMP_SEQ;
+
+drop table JICA8_BOARD_MAIN_SEQ;
+drop table JICA8_REPLY_TABLE;
+drop table JICA8_ANSWER_TABLE;
+drop table JICA8_BOARD_CONTENT_TABLE;
+drop table JICA8_CART_TABLE;
+drop table JICA8_BUY_PRODUCT_INFO_TABLE;
+drop table JICA8_BUY_INFO_TABLE;
+drop table JICA8_PRODUCT_TABLE;
+drop table JICA8_BOARD_INFO_TABLE;
+drop table JICA8_USER_TABLE;
+drop table JICA8_BANNER_TABLE;
+drop table JICA8_BOARD_CATEGORY_TABLE;
+drop table JICA8_PRODUCT_CATEGORY_TABLE;
+drop table JICA8_BUY_TEMP_TABLE;
+
+-- 시퀀스
+create sequence JICA8_BOARD_MAIN_SEQ
+start with 0
+increment by 1
+minvalue 0;
+
+create sequence JICA8_PRODUCT_CATEGORY_SEQ
+start with 0
+increment by 1
+minvalue 0;
+
+create sequence JICA8_BOARD_CATEGORY_SEQ
+start with 0
+increment by 1
+minvalue 0;
+
+
+
+create sequence JICA8_BOARD_INFO_SEQ
+start with 0
+increment by 1
+minvalue 0;
+
+create sequence JICA8_BANNER_SEQ
+start with 0
+increment by 1
+minvalue 0;
+
+create sequence JICA8_PRODUCT_SEQ
+start with 0
+increment by 1
+minvalue 0;
+
+create sequence JICA8_BUY_INFO_SEQ
+start with 0
+increment by 1
+minvalue 0;
+
+create sequence JICA8_BUY_PRODUCT_INFO_SEQ
+start with 0
+increment by 1
+minvalue 0;
+
+create sequence JICA8_USER_SEQ
+start with 0
+increment by 1
+minvalue 0;
+
+create sequence JICA8_CART_SEQ
+start with 0
+increment by 1
+minvalue 0;
+
+create sequence JICA8_BOARD_CONTENT_SEQ
+start with 0
+increment by 1
+minvalue 0;
+
+create sequence JICA8_ANSWER_SEQ
+start with 0
+increment by 1
+minvalue 0;
+
+create sequence JICA8_REPLY_SEQ
+start with 0
+increment by 1
+minvalue 0;
+
+create sequence JICA8_BUY_TEMP_SEQ
+start with 0
+increment by 1
+minvalue 0;
+
+
+-- 테이블
+
+create table JICA8_BOARD_MAIN_TABLE(
+BOARD_MAIN_IDX NUMBER constraint JICA8_BOARD_MAIN_PK primary key,
+BOARD_MAIN_NAME VARCHAR2(500) not null
+                                 constraint JICA8_BOARD_MAIN_UQ unique,
+BOARD_CATEGORY_STATUS NUMBER not null
+);
+
+
+create table JICA8_PRODUCT_CATEGORY_TABLE(
+PRODUCT_CATEGORY_IDX NUMBER constraint JICA8_PRODUCT_CATEGORY_PK primary key,	
+PRODUCT_CATEGORY_NAME VARCHAR2(500) not null
+                                    constraint JICA8_PRODUCT_CATEGORY_UQ unique,
+PRODUCT_CATEGORY_STATUS NUMBER not null오전 11:05 2019-08-20
+);
+
+create table JICA8_BOARD_CATEGORY_TABLE(
+BOARD_CATEGORY_IDX NUMBER constraint JICA8_BOARD_CATEGORY_PK primary key,
+BOARD_CATEGORY_NAME VARCHAR2(500) not null
+                                 constraint JICA8_BOARD_CATEGORY_UQ unique,
+BOARD_CATEGORY_STATUS NUMBER not null
+);
+
+create table JICA8_BANNER_TABLE(
+BANNER_IDX NUMBER constraint JICA8_BANNER_PK primary key,
+BANNER_IMAGE_FILE VARCHAR2(500) not null,
+BANNER_STATUS NUMBER not null,
+BANNER_URL VARCHAR2(500)
+);
+
+
+create table JICA8_USER_TABLE(
+USER_IDX NUMBER constraint JICA8_JICA8_USER_PK primary key,
+USER_STATUS NUMBER not null,
+USER_ID	VARCHAR2(20) not null
+                 constraint JICA8_JICA8_USER_UQ unique,
+USER_PW	VARCHAR2(20) not null,
+USER_NAME	VARCHAR2(10) not null,
+USER_POST_CODE	VARCHAR2(5) not null,
+USER_ADDR1	VARCHAR2(500) not null,
+USER_ADDR2	VARCHAR2(500) not null,
+USER_ADDR3	VARCHAR2(500) not null,
+USER_PHONE1	VARCHAR2(500) not null,
+USER_PHONE2	VARCHAR2(500) not null,
+USER_PHONE3	VARCHAR2(500) not null,
+USER_GRADE	NUMBER not null
+);
+
+create table JICA8_BOARD_INFO_TABLE(
+BOARD_INFO_IDX	NUMBER constraint JICA8_JICA8_BOARD_INFO_PK primary key,
+BOARD_INFO_NAME	VARCHAR2(500) not null
+                              constraint JICA8_JICA8_BOARD_INFO_UQ unique,
+BOARD_INFO_STATUS	NUMBER not null,
+BOARD_INFO_CATEGORY_IDX	NUMBER not null
+                               constraint JICA8_JICA8_BOARD_INFO_FK
+                               references JICA8_BOARD_CATEGORY_TABLE(BOARD_CATEGORY_IDX),
+BOARD_ANSWER_CHK	NUMBER not null,
+BOARD_USER_WRITE_CHK	NUMBER not null
+);
+
+create table JICA8_PRODUCT_TABLE(
+PRODUCT_IDX	NUMBER constraint JICA8_PRODUCT_PK primary key, 
+PRODUCT_STATUS	NUMBER not null,
+PRODUCT_IMAGE_FILE	VARCHAR2(500) not null,
+PRODUCT_NAME	VARCHAR2(500) not null,
+PRODUCT_PRICE	NUMBER not null,
+PRODUCT_CATEGORY_IDX NUMBER not null 
+                     constraint JICA8_PRODUCT_FK
+                     references JICA8_PRODUCT_CATEGORY_TABLE(PRODUCT_CATEGORY_IDX),
+PRODUCT_INFO_IMAGE_FILE	VARCHAR2(500) not null,
+PRODUCT_SALES_CNT	NUMBER not null
+);
+
+create table JICA8_BUY_INFO_TABLE(
+BUY_IDX	NUMBER constraint JICA8_BUY_INFO_PK primary key,
+BUY_STATUS	NUMBER not null,
+BUY_NAME	VARCHAR2(10) not null,
+BUY_POST_CODE	VARCHAR2(5) not null,
+BUY_ADDR1	VARCHAR2(500) not null,
+BUY_ADDR2	VARCHAR2(500) not null,
+BUY_ADDR3	VARCHAR2(500) not null,
+BUY_PHONE1	VARCHAR2(3) not null,
+BUY_PHONE2	VARCHAR2(4) not null,
+BUY_PHONE3	VARCHAR2(4) not null,
+BUY_DATE	DATE not null,
+BUY_USER_IDX	NUMBER not null
+                       constraint JICA8_BUY_INFO_FK
+                       references JICA8_USER_TABLE(USER_IDX)
+);
+
+create table JICA8_BUY_PRODUCT_INFO_TABLE(
+BUY_PRODUCT_INFO_IDX	NUMBER constraint JICA8_BUY_PRODUCT_INFO_PK primary key,
+BUY_PRODUCT_INFO_STATUS	NUMBER not null,
+BUY_PRODUCT_IDX	NUMBER not null
+                       constraint JICA8_BUY_PRODUCT_FK
+                       references JICA8_PRODUCT_TABLE(PRODUCT_IDX),
+BUY_PRODUCT_INFO_CNT	NUMBER not null,
+BUY_PRODUCT_INFO_PRICE	NUMBER not null,
+BUY_PRODUCT_INFO_NAME	VARCHAR2(500) not null,
+BUY_PRODUCT_INFO_IMAGE_FILE	VARCHAR2(500) not null,
+BUY_PRODUCT_INFO_DETAIL_FILE VARCHAR2(500) not null,
+BUY_IDX number not null 
+        constraint JICA8_BUY_PRODUCT_FK2
+        references JICA8_BUY_INFO_TABLE(BUY_IDX)
+);
+
+create table JICA8_CART_TABLE(
+CART_IDX	NUMBER constraint JICA8_CART_PK primary key,
+CART_STATUS	NUMBER not null, 
+CART_PRODUCT_IDX	NUMBER not null
+                           constraint JICA8_CART_FK1
+                           references JICA8_PRODUCT_TABLE(PRODUCT_IDX),
+CART_DATE	DATE not null,
+CART_USER_IDX	NUMBER not null
+                       constraint JICA8_CART_FK2
+                       references JICA8_USER_TABLE(USER_IDX)
+);
+
+create table JICA8_BOARD_CONTENT_TABLE(
+BOARD_CONTENT_IDX	NUMBER constraint JICA8_BOARD_CONTENT_PK primary key,
+BOARD_CONTENT_SUBJECT	VARCHAR2(500) not null,
+BOARD_CONTENT_TEXT	LONG not null,
+BOARD_CONTENT_STATUS	NUMBER not null,
+BOARD_CONTENT_DATE	DATE not null,
+BOARD_CONTENT_IP	VARCHAR2(100) not null,
+BOARD_IDX	NUMBER not null 
+                   constraint JICA8_BOARD_CONTENT_FK1
+                   references JICA8_BOARD_INFO_TABLE(BOARD_INFO_IDX),
+BOARD_ANSWER_CHK	NUMBER not null,
+BOARD_WRITER_IDX	NUMBER not null 
+                           constraint JICA8_BOARD_CONTENT_FK2
+                           references JICA8_USER_TABLE(USER_IDX)
+);
+
+create table JICA8_ANSWER_TABLE(
+ANSWER_IDX	NUMBER constraint JICA8_ANSWER_PK primary key,
+ANSWER_STATUS	NUMBER not null,
+ANSWER_TEXT	LONG not null,
+ANSWER_CONTENT_IDX	NUMBER not null
+                           constraint JICA8_ANSWER_FK
+                           references JICA8_BOARD_CONTENT_TABLE(BOARD_CONTENT_IDX)
+);
+
+create table JICA8_REPLY_TABLE(
+REPLY_IDX	NUMBER constraint JICA8_REPLY_PK primary key,
+REPLY_STATUS	NUMBER not null,
+REPLY_WRITER_IDX	NUMBER not null
+                           constraint JICA8_REPLY_FK1
+                           references JICA8_USER_TABLE(USER_IDX),
+REPLY_CONTENT_IDX	NUMBER not null
+                           constraint JICA8_REPLY_FK2
+                           references JICA8_BOARD_CONTENT_TABLE(BOARD_CONTENT_IDX),
+REPLY_IP	VARCHAR2(100) not null,
+REPLY_DATE	DATE not null,
+REPLY_TEXT	LONG not null
+);
+
+create table JICA8_BUY_TEMP_TABLE(
+BUY_TEMP_IDX NUMBER constraint JICA8_BUY_TEMP_PK primary key,
+BUY_TEMP_PRODUCT_IDX NUMBER not null,
+BUY_TEMP_CNT NUMBER not null,
+BUY_TEMP_PRICE NUMBER not null,
+BUY_TEMP_USER_IDX number not null
+);
+
+
+
+
+
+-- 초기 데이터
+insert into JICA8_USER_TABLE 
+(USER_IDX, USER_STATUS, USER_ID, USER_PW, USER_NAME, USER_POST_CODE, USER_ADDR1,
+USER_ADDR2, USER_ADDR3, USER_PHONE1, USER_PHONE2, USER_PHONE3, USER_GRADE)
+values (JICA8_USER_SEQ.nextval, 1, 'manager', '1234', '관리자', '11111', '대충대충', 
+'대충대충', '대충대충', '010', '2222', '3333', 2);
+
+insert into JICA8_BOARD_CATEGORY_TABLE
+(BOARD_CATEGORY_IDX, BOARD_CATEGORY_NAME, BOARD_CATEGORY_STATUS)
+values (JICA8_BOARD_CATEGORY_SEQ.nextval, '자유게시판', 1);
+
+insert into JICA8_BOARD_CATEGORY_TABLE
+(BOARD_CATEGORY_IDX, BOARD_CATEGORY_NAME, BOARD_CATEGORY_STATUS)
+values (JICA8_BOARD_CATEGORY_SEQ.nextval, '이벤트게시판', 1);
+
+insert into JICA8_BOARD_CATEGORY_TABLE
+(BOARD_CATEGORY_IDX, BOARD_CATEGORY_NAME, BOARD_CATEGORY_STATUS)
+values (JICA8_BOARD_CATEGORY_SEQ.nextval, '문의및고객센터', 1);
+
+insert into JICA8_BOARD_MAIN_TABLE
+(BOARD_MAIN_IDX, BOARD_MAIN_NAME, BOARD_MAIN_STATUS)
+values (JICA8_BOARD_MAIN_SEQ.nextval, '나만의 상품', 1);
+
+insert into JICA8_BOARD_MAIN_TABLE
+(BOARD_MAIN_IDX, BOARD_MAIN_NAME, BOARD_MAIN_STATUS)
+values (JICA8_BOARD_MAIN_SEQ.nextval, '패키지 상품', 1);
+
+insert into JICA8_BOARD_INFO_TABLE
+(BOARD_INFO_IDX, BOARD_INFO_NAME, BOARD_INFO_STATUS, BOARD_INFO_CATEGORY_IDX,
+BOARD_ANSWER_CHK, BOARD_USER_WRITE_CHK)
+values (JICA8_BOARD_INFO_SEQ.nextval, '공지사항', 1, 1, 0, 0);
+
+
+
+
+insert into jica8_product_category_table
+(product_CATEGORY_IDX, product_CATEGORY_NAME, product_CATEGORY_STATUS)
+values (jica8_product_category_SEQ.nextval, '숙박시설', 1);
+
+insert into jica8_product_category_table
+(product_CATEGORY_IDX, product_CATEGORY_NAME, product_CATEGORY_STATUS)
+values (jica8_product_category_SEQ.nextval, '음식탐방', 1);
+
+insert into jica8_product_category_table
+(product_CATEGORY_IDX, product_CATEGORY_NAME, product_CATEGORY_STATUS)
+values (jica8_product_category_SEQ.nextval, '레저 * 티켓', 1);
+
+insert into jica8_product_category_table
+(product_CATEGORY_IDX, product_CATEGORY_NAME, product_CATEGORY_STATUS)
+values (jica8_product_category_SEQ.nextval, '당일치기코스', 1);
+
+insert into jica8_product_category_table
+(product_CATEGORY_IDX, product_CATEGORY_NAME, product_CATEGORY_STATUS)
+values (jica8_product_category_SEQ.nextval, '1박2일코스', 1);
+
+insert into jica8_product_category_table
+(product_CATEGORY_IDX, product_CATEGORY_NAME, product_CATEGORY_STATUS)
+values (jica8_product_category_SEQ.nextval, '2박3일코스', 1);
+
+
+
+
+
+commit;
+

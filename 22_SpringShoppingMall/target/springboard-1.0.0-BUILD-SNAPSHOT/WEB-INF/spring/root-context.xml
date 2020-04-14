@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- myBatis 셋팅 -->
+	<!-- DBCP -->
+	<bean id="dataSource2" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value='oracle.jdbc.OracleDriver'/>
+		<property name='url' value='jdbc:oracle:thin:@192.168.177.7:1521:orcl'/>
+		<property name="username" value="study1"/>
+		<property name="password" value='1234'/>
+	</bean>		
+	
+	<!-- 데이터베이스 접속 정보와 sql문이 작성되어 있는 Mapper 정보를 가지고 있는 Bean -->
+	<bean id='sqlSession' class='org.mybatis.spring.SqlSessionFactoryBean'>
+		<property name="dataSource" ref='dataSource2'/>
+		<property name='mapperLocations' value='classpath*:com/jica/springshoppingmall/mapper/**/*.xml'/>
+	</bean>		
+	
+	<!-- dao 역할을할 Bean -->
+	<bean id='temp' class='org.mybatis.spring.SqlSessionTemplate'>
+		<constructor-arg ref='sqlSession' index='0'/>
+	</bean>	
+	
+</beans>

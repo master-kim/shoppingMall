@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="product_db">
+
+	<!-- 제품 리스트 이름 및 페이지 카테고리 -->
+	<select id='product_info' parameterType="int" resultType="com.jica.springshoppingmall.beans.ProductCategoryBean">
+		select product_category_idx , product_category_name
+		from JICA8_product_CATEGORY_TABLE
+		where product_category_idx = #{id}
+	</select>
+	
+	<!-- 상품 리스트 가져오기 -->
+	<!-- 크냐 작냐와 같은 연산자를 사용할 때 는 xml에서 제공하는 CDATA 형태로 작성한다. -->
+	<select id="product_list" parameterType="map" resultType="com.jica.springshoppingmall.beans.ProductBean">
+		<![CDATA[ 
+		select * from 
+		(select rownum as row_idx, r1.* from (
+		
+		select product_idx , product_name , product_image_file , product_price ,product_status
+		from jica8_product_table
+		where product_category_idx = #{product_category_idx}
+		order by product_idx desc
+		
+		) r1) r2
+	    where r2.row_idx  >= #{min} and r2.row_idx <= #{max}
+	    
+	    ]]>
+	</select>
+	
+	<!-- 전체 상품의 개수 가져오기 -->
+	<select id='product_cnt' resultType="int">
+		select count(*) from JICA8_product_TABLE
+	</select>
+	
+	<!-- 상품 자세히보기 -->
+	<select id ='product_info_detail' parameterType='int' resultType="com.jica.springshoppingmall.beans.ProductBean">
+		select product_name , product_price , product_image_file 
+			, product_category_idx , product_info
+		from JICA8_product_TABLE
+		where product_idx = #{id}
+	</select>
+	
+	<!-- 구매자 정보 가져오기 -->
+	<select id ='buyer_info' resultType ='com.jica.springshoppingmall.beans.UserBean'>
+	select * from jica8_user_table
+	where user_idx = #{user_idx}
+	</select>
+	
+	<!-- 총금액 가져오기 -->
+	<select id ='buy_sum' parameterType='map' resultType='com.jica.springshoppingmall.beans.BuyCompleteBean'>
+		select sum(product_price * #{product_cnt}) as buy_complete_total_price from jica8_product_table
+   		where product_idx = #{product_idx}
+	</select>
+
+</mapper>
+
+
+
+
+
+

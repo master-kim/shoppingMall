@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+                        
+                                            
+<mapper namespace="user_db">
+	<!-- 로그인 -->
+	<select id='user_login_pro' parameterType="com.jica.springshoppingmall.beans.UserBean" resultType="com.jica.springshoppingmall.beans.UserBean">
+		select USER_IDX, USER_GRADE
+		from JICA8_USER_TABLE
+		where USER_ID = #{user_id} and USER_PW = #{user_pw} and USER_STATUS = #{user_status}
+	</select>
+	<!-- 아이디 중복확인 -->
+	<select id='check_user_id' parameterType="java.lang.String" resultType='java.lang.String'>
+		select USER_ID
+		from JICA8_USER_TABLE
+		where USER_ID = #{id}
+	</select>
+	
+	<!-- 회원 가입 처리 -->
+	<insert id='join_user' parameterType="com.jica.springshoppingmall.beans.UserBean">
+		insert into JICA8_USER_TABLE
+		       (USER_IDX, USER_STATUS, USER_ID, USER_PW, USER_NAME, USER_POST_CODE,
+		        USER_ADDR1, USER_ADDR2, USER_ADDR3, USER_PHONE1, USER_PHONE2, USER_PHONE3,
+		        USER_GRADE)
+		values (JICA8_USER_SEQ.nextval, 1, #{user_id}, #{user_pw}, #{user_name},
+		       #{user_post_code}, #{user_addr1}, #{user_addr2}, #{user_addr3}, #{user_phone1},
+		       #{user_phone2}, #{user_phone3}, 2)
+	</insert>
+	
+	<!-- 사용자 정보 가져오기 -->
+	<select id='get_user_info' parameterType="int" resultType="com.jica.springshoppingmall.beans.UserBean">
+		select user_idx, user_status, user_id, user_pw, user_name, user_post_code,
+		       user_addr1, user_addr2, user_addr3, user_phone1, user_phone2, user_phone3,
+		       user_grade
+		from jica8_user_table
+		where user_idx = #{user_idx}	
+	</select>
+	
+	<!-- 사용자 정보 수정하기 -->
+	<select id='modify_user_info' parameterType="com.jica.springshoppingmall.beans.UserBean">
+		update jica8_user_table
+		set user_post_code = #{user_post_code}, user_addr1 = #{user_addr1}, user_addr2 = #{user_addr2}, user_addr3 = #{user_addr3},
+		    user_phone1 = #{user_phone1}, user_phone2 = #{user_phone2}, user_phone3 = #{user_phone3}
+		    
+		    <if test="user_pw != null">
+				, user_pw = #{user_pw}
+			</if> 
+		where user_idx = #{user_idx}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+

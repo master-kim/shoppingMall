@@ -1,0 +1,280 @@
+-- 삭제 처리(테이블)
+drop table jica8_user_table;
+drop table jica8_product_table;
+drop table jica8_product_category_table;
+drop table jica8_board_main_table;
+drop table jica8_board_category_table;
+drop table jica8_board_content_table;
+drop table JICA8_BUY_INFO_TABLE;
+drop table JICA8_BUY_COMPLETE_TABLE;
+drop table JICA8_CART_TABLE;
+
+-- 삭제처리 (시퀀스)
+drop sequence jica8_user_seq;
+drop sequence jica8_product_seq;
+drop sequence jica8_product_category_seq;
+drop sequence jica8_board_main_seq;
+drop sequence jica8_board_category_seq;
+drop sequence jica8_board_content_seq;
+drop sequence JICA8_BUY_INFO_SEQ;
+drop sequence JICA8_BUY_COMPLETE_SEQ;
+drop sequence JICA8_CART_SEQ;
+
+-- 시퀀스 생성
+create sequence jica8_user_seq
+start with 0
+increment by 1
+minvalue 0;
+
+create sequence jica8_product_seq
+start with 0
+increment by 1
+minvalue 0;
+
+create sequence jica8_product_category_seq
+start with 0
+increment by 1
+minvalue 0;
+
+create sequence jica8_board_main_seq
+start with 0
+increment by 1
+minvalue 0;
+
+
+create sequence jica8_board_category_seq
+start with 0
+increment by 1
+minvalue 0;
+
+create sequence JICA8_BOARD_CONTENT_SEQ
+start with 0
+increment by 1
+minvalue 0;
+
+create sequence JICA8_BUY_INFO_SEQ
+start with 0
+increment by 1
+minvalue 0;
+
+create sequence JICA8_BUY_COMPLETE_SEQ
+start with 0
+increment by 1
+minvalue 0;
+
+create sequence JICA8_CART_SEQ
+start with 0
+increment by 1
+minvalue 0;
+
+-- 테이블 생성
+
+create table JICA8_USER_TABLE(
+USER_IDX NUMBER constraint JICA8_JICA8_USER_PK primary key,
+USER_STATUS NUMBER not null,
+USER_ID	VARCHAR2(20) not null
+                 constraint JICA8_JICA8_USER_UQ unique,
+USER_PW	VARCHAR2(20) not null,
+USER_NAME	VARCHAR2(10) not null,
+USER_POST_CODE	VARCHAR2(5) not null,
+USER_ADDR1	VARCHAR2(500) not null,
+USER_ADDR2	VARCHAR2(500) not null,
+USER_ADDR3	VARCHAR2(500) not null,
+USER_PHONE1	VARCHAR2(500) not null,
+USER_PHONE2	VARCHAR2(500) not null,
+USER_PHONE3	VARCHAR2(500) not null,
+USER_GRADE	NUMBER not null
+);
+
+create table JICA8_PRODUCT_TABLE(
+PRODUCT_IDX	NUMBER constraint JICA8_PRODUCT_PK primary key, 
+PRODUCT_STATUS	NUMBER not null,
+PRODUCT_IMAGE_FILE	VARCHAR2(500) not null,
+PRODUCT_NAME	VARCHAR2(500) not null,
+PRODUCT_PRICE	NUMBER not null,
+PRODUCT_CATEGORY_IDX NUMBER not null 
+                     constraint JICA8_PRODUCT_FK
+                     references JICA8_PRODUCT_CATEGORY_TABLE(PRODUCT_CATEGORY_IDX),
+PRODUCT_INFO_IMAGE_FILE	VARCHAR2(500) not null,
+);
+
+create table JICA8_PRODUCT_CATEGORY_TABLE(
+PRODUCT_CATEGORY_IDX NUMBER constraint JICA8_PRODUCT_CATEGORY_PK primary key,	
+PRODUCT_CATEGORY_NAME VARCHAR2(500) not null
+                                    constraint JICA8_PRODUCT_CATEGORY_UQ unique,
+PRODUCT_CATEGORY_STATUS NUMBER not null
+);
+
+create table JICA8_BOARD_MAIN_TABLE(
+BOARD_MAIN_IDX NUMBER constraint JICA8_BOARD_MAIN_PK primary key,
+BOARD_MAIN_NAME VARCHAR2(500) not null
+                                 constraint JICA8_BOARD_MAIN_UQ unique,
+BOARD_CATEGORY_STATUS NUMBER not null
+);
+
+create table JICA8_BOARD_CATEGORY_TABLE(
+BOARD_CATEGORY_IDX NUMBER constraint JICA8_BOARD_CATEGORY_PK primary key,
+BOARD_CATEGORY_NAME VARCHAR2(500) not null
+                                 constraint JICA8_BOARD_CATEGORY_UQ unique,
+BOARD_CATEGORY_STATUS NUMBER not null
+);
+
+create table JICA8_BOARD_CONTENT_TABLE(
+BOARD_CONTENT_IDX	NUMBER constraint JICA8_BOARD_CONTENT_PK primary key,
+BOARD_CONTENT_SUBJECT	VARCHAR2(500) not null,
+BOARD_CONTENT_TEXT	LONG not null,
+BOARD_CONTENT_DATE	DATE not null,
+BOARD_CATEGORY_IDX	NUMBER not null
+						   constraint JICA8_BOARD_CONTENT_FK1
+                           references JICA8_BOARD_CATEGORY_TABLE(BOARD_CATEGORY_IDX),
+BOARD_WRITER_IDX	NUMBER not null 
+                           constraint JICA8_BOARD_CONTENT_FK2
+                           references JICA8_USER_TABLE(USER_IDX)
+);
+
+create table JICA8_BUY_INFO_TABLE(
+BUY_IDX	NUMBER constraint JICA8_BUY_INFO_PK primary key,
+BUY_STATUS	NUMBER not null,
+BUY_NAME	VARCHAR2(10) not null,
+BUY_POST_CODE	VARCHAR2(5) not null,
+BUY_ADDR1	VARCHAR2(500) not null,
+BUY_ADDR2	VARCHAR2(500) not null,
+BUY_ADDR3	VARCHAR2(500) not null,
+BUY_PHONE1	VARCHAR2(3) not null,
+BUY_PHONE2	VARCHAR2(4) not null,
+BUY_PHONE3	VARCHAR2(4) not null,
+BUY_DATE	DATE not null,
+BUY_USER_IDX	NUMBER not null
+                       constraint JICA8_BUY_INFO_FK
+                       references JICA8_USER_TABLE(USER_IDX)
+);
+
+create table JICA8_BUY_COMPLETE_TABLE(
+BUY_COMPLETE_IDX	NUMBER constraint JICA8_BUY_COMPLETE primary key,
+BUY_COMPLETE_PRODUCT_IDX	NUMBER not null
+                       constraint JICA8_BUY_COMPLETE_FK
+                       references JICA8_PRODUCT_TABLE(PRODUCT_IDX),
+BUY_COMPLETE_NAME VARCHAR2(500),
+BUY_COMPLETE_CNT	NUMBER not null,
+BUY_COMPLETE_PRICE	NUMBER not null,
+BUY_COMPLETE_TOTAL_PRICE	NUMBER not null,
+BUY_COMPLETE_DATE DATE NOT NULL
+);
+
+create table JICA8_CART_TABLE(
+CART_IDX	NUMBER constraint JICA8_CART_PK primary key,
+CART_PRODUCT_IDX	NUMBER not null
+                           constraint JICA8_CART_FK1
+                           references JICA8_PRODUCT_TABLE(PRODUCT_IDX),
+CART_DATE	DATE not null,
+CART_USER_IDX	NUMBER not null
+                       constraint JICA8_CART_FK2
+                       references JICA8_USER_TABLE(USER_IDX),
+CART_CNT NUMBER  not null     ,
+CART_PRICE  NUMBER  not null ,
+CART_TOTAL_PRICE NUMBER  not null               
+);
+
+
+-- 초기 인설트 값
+
+insert into JICA8_USER_TABLE 
+(USER_IDX, USER_STATUS, USER_ID, USER_PW, USER_NAME, USER_POST_CODE, USER_ADDR1,
+USER_ADDR2, USER_ADDR3, USER_PHONE1, USER_PHONE2, USER_PHONE3, USER_GRADE)
+values (JICA8_USER_SEQ.nextval, 1, 'manager', '1234', '관리자', '11111', '대충대충', 
+'대충대충', '대충대충', '010', '2222', '3333', 2);
+
+insert into JICA8_BOARD_CATEGORY_TABLE
+(BOARD_CATEGORY_IDX, BOARD_CATEGORY_NAME, BOARD_CATEGORY_STATUS)
+values (JICA8_BOARD_CATEGORY_SEQ.nextval, '자유게시판', 1);
+
+insert into JICA8_BOARD_CATEGORY_TABLE
+(BOARD_CATEGORY_IDX, BOARD_CATEGORY_NAME, BOARD_CATEGORY_STATUS)
+values (JICA8_BOARD_CATEGORY_SEQ.nextval, '이벤트게시판', 1);
+
+insert into JICA8_BOARD_CATEGORY_TABLE
+(BOARD_CATEGORY_IDX, BOARD_CATEGORY_NAME, BOARD_CATEGORY_STATUS)
+values (JICA8_BOARD_CATEGORY_SEQ.nextval, '문의및고객센터', 1);
+
+insert into JICA8_BOARD_MAIN_TABLE
+(BOARD_MAIN_IDX, BOARD_MAIN_NAME, BOARD_MAIN_STATUS)
+values (JICA8_BOARD_MAIN_SEQ.nextval, '나만의 상품', 1);
+
+insert into JICA8_BOARD_MAIN_TABLE
+(BOARD_MAIN_IDX, BOARD_MAIN_NAME, BOARD_MAIN_STATUS)
+values (JICA8_BOARD_MAIN_SEQ.nextval, '패키지 상품', 1);
+
+insert into jica8_product_category_table
+(product_CATEGORY_IDX, product_CATEGORY_NAME, product_CATEGORY_STATUS)
+values (jica8_product_category_SEQ.nextval, '숙박시설', 1);
+
+insert into jica8_product_category_table
+(product_CATEGORY_IDX, product_CATEGORY_NAME, product_CATEGORY_STATUS)
+values (jica8_product_category_SEQ.nextval, '음식탐방', 1);
+
+insert into jica8_product_category_table
+(product_CATEGORY_IDX, product_CATEGORY_NAME, product_CATEGORY_STATUS)
+values (jica8_product_category_SEQ.nextval, '레저 * 티켓', 1);
+
+insert into jica8_product_category_table
+(product_CATEGORY_IDX, product_CATEGORY_NAME, product_CATEGORY_STATUS)
+values (jica8_product_category_SEQ.nextval, '당일치기코스', 1);
+
+insert into jica8_product_category_table
+(product_CATEGORY_IDX, product_CATEGORY_NAME, product_CATEGORY_STATUS)
+values (jica8_product_category_SEQ.nextval, '1박2일코스', 1);
+
+insert into jica8_product_category_table
+(product_CATEGORY_IDX, product_CATEGORY_NAME, product_CATEGORY_STATUS)
+values (jica8_product_category_SEQ.nextval, '2박3일코스', 1);
+
+
+-- 상품 카테고리 테이블 추가하기
+insert into jica8_product_category_table
+(product_category_idx , product_category_name , product_category_status)
+values (jica8_product_category_SEQ.nextval, '2박3일코스' , 1);
+
+-- 상품 테이블 추가하기
+
+insert into jica8_product_table
+(product_idx , product_status,product_image_file,
+product_name , product_price, product_category_idx, PRODUCT_INFO_IMAGE_file)
+values (jica8_product_SEQ.nextval, 1, 'client/image/best5.PNG' ,'전주 호텔 놀러오세요', 
+1550000 , 1 ,'client/image/jeonjuproduct.jpg');
+
+-- 장바구니 테이블에 추가하기
+insert into JICA8_cart_TABLE
+(CART_IDX , CART_PRODUCT_IDX,  CART_DATE , CART_USER_IDX , cart_cnt  )
+VALUES(JICA8_cart_seq.nextval, #{cart_product_idx} , sysdate, #{cart_user_idx} , #{cart_cnt})
+
+
+
+commit;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
