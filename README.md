@@ -8,17 +8,17 @@
 
 개발 환경
 
-개발 IDE 툴 : 이클립스
+- 개발 IDE 툴 : 이클립스
 
-프로젝트 환경 : Spring legacy project
+- 프로젝트 환경 : Spring legacy project
 
-서버 구축 : tomcat
+- 서버 구축 : tomcat
 
-DB 연결 방식 : Mybatis
+- DB 연결 방식 : Mybatis
 
-쿼리 작성 : xml
+- 쿼리 작성 : xml
 
-DB 및 DB 툴 : Oracle , OracleDev
+- DB 및 DB 툴 : Oracle , OracleDev
 
 당시 프로젝트 상세 내용 
 
