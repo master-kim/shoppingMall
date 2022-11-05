@@ -21,6 +21,47 @@
 
 # 실행 스크린 샷
 
+<div align="left">
+  <p> (1) 메인 화면 , (2) 메인 스크롤 화면</p>
+	<img src="https://user-images.githubusercontent.com/61484038/200117207-ab6ab3b5-55d9-4c94-8b54-d5d3f483aa67.PNG" width=49% height="350"/>
+	<img src="https://user-images.githubusercontent.com/61484038/200117434-491362e2-b22f-49df-96ee-097aed4e9be8.PNG" width=49% height="350"/>
+</div>
+<div align="left">
+  <p> (3) 로그인 화면 , (4) 회원 가입 화면 </p>
+	<img src="https://user-images.githubusercontent.com/61484038/200117578-796ea0ec-c6c7-4faa-ba57-eaf074778582.PNG" width=49% height="350"/>
+	<img src="https://user-images.githubusercontent.com/61484038/200117663-fbaec603-82bb-4984-a196-d333e830ef84.PNG" width=49% height="350"/>
+</div>
+<div align="left">
+  <p> (5) 내 정보 페이지, (6) 회원 정보 수정 페이지</p>
+	<img src="https://user-images.githubusercontent.com/61484038/200117611-0f96d1c3-3f12-4599-9086-bd8d0cd1dfd9.PNG" width=49% height="350"/>
+	<img src="https://user-images.githubusercontent.com/61484038/200117664-22bd531d-4771-49c6-b305-2e247a219021.PNG" width=49% height="350"/>
+</div>
+<div align="left">
+  <p> (7) 게시글 리스트, (8) 게시글 조회 , (9) 게시글 작성 </p> 
+	<img src="https://user-images.githubusercontent.com/61484038/200117741-45e1a2bf-48be-4756-ac45-5d6a4105b081.PNG" width=33% height="350"/>
+	<img src="https://user-images.githubusercontent.com/61484038/200117746-e8863b4c-5f78-4f5d-96fd-a64c8c2f47bd.PNG" width=33% height="350"/>
+  <img src="https://user-images.githubusercontent.com/61484038/200117744-aa93f874-b03c-4226-a237-5121c420ad26.PNG" width=33% height="350"/>
+</div>
+<div align="left">
+  <p> (10) 구매 화면, (11) 장바구니 화면 , (12) 구매 이력 리스트 </p> 
+	<img src="https://user-images.githubusercontent.com/61484038/200117749-e9ac50c7-da88-470c-ac8d-87313dc61768.PNG" width=33% height="350"/>
+	<img src="https://user-images.githubusercontent.com/61484038/200117759-eac2155f-244b-450f-8bea-bdc2a611d70e.PNG" width=33% height="350"/>
+  <img src="https://user-images.githubusercontent.com/61484038/200117748-6c05ff5a-22c4-4e1a-8039-a257c013e66a.PNG" width=33% height="350"/>
+</div>
+<div align="left">
+  <p> (13) 관리자 메인 화면, (14) 관리자 회원 리스트 화면</p>
+	<img src="https://user-images.githubusercontent.com/61484038/200117747-25233b19-56dd-405f-89d7-bdce6aedaddb.PNG" width=49% height="350"/>
+	<img src="https://user-images.githubusercontent.com/61484038/200117762-0a9d0061-367c-4e03-a172-8e57e42895e9.PNG" width=49% height="350"/>
+</div>
+<div align="left">
+  <p> (15) 관리자 상품 등록, (16) 관리자 상품 등록 리스트 화면</p>
+	<img src="https://user-images.githubusercontent.com/61484038/200117756-42d856f0-9598-4e6f-be25-4afd77b2de27.PNG" width=49% height="350"/>
+	<img src="https://user-images.githubusercontent.com/61484038/200117757-c7574dc1-4a26-4c97-9c6f-e953c65a6f6a.PNG" width=49% height="350"/>
+</div>
+
+
+
+
 # 당시 프로젝트 상세 내용 
 
 -> Spring legacy project를 전주 여행 티켓등을 사고 팔 수 있는 프로젝트를 수행
