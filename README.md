@@ -39,15 +39,15 @@
 </div>
 <div align="left">
   <p> (7) 게시글 리스트, (8) 게시글 조회 , (9) 게시글 작성 </p> 
-	<img src="https://user-images.githubusercontent.com/61484038/200117741-45e1a2bf-48be-4756-ac45-5d6a4105b081.PNG" width=33% height="350"/>
-	<img src="https://user-images.githubusercontent.com/61484038/200117746-e8863b4c-5f78-4f5d-96fd-a64c8c2f47bd.PNG" width=33% height="350"/>
-  <img src="https://user-images.githubusercontent.com/61484038/200117744-aa93f874-b03c-4226-a237-5121c420ad26.PNG" width=33% height="350"/>
+	<img src="https://user-images.githubusercontent.com/61484038/200117741-45e1a2bf-48be-4756-ac45-5d6a4105b081.PNG" width=31% height="350"/>
+	<img src="https://user-images.githubusercontent.com/61484038/200117746-e8863b4c-5f78-4f5d-96fd-a64c8c2f47bd.PNG" width=31% height="350"/>
+  <img src="https://user-images.githubusercontent.com/61484038/200117744-aa93f874-b03c-4226-a237-5121c420ad26.PNG" width=31% height="350"/>
 </div>
 <div align="left">
   <p> (10) 구매 화면, (11) 장바구니 화면 , (12) 구매 이력 리스트 </p> 
-	<img src="https://user-images.githubusercontent.com/61484038/200117749-e9ac50c7-da88-470c-ac8d-87313dc61768.PNG" width=33% height="350"/>
-	<img src="https://user-images.githubusercontent.com/61484038/200117759-eac2155f-244b-450f-8bea-bdc2a611d70e.PNG" width=33% height="350"/>
-  <img src="https://user-images.githubusercontent.com/61484038/200117748-6c05ff5a-22c4-4e1a-8039-a257c013e66a.PNG" width=33% height="350"/>
+	<img src="https://user-images.githubusercontent.com/61484038/200117749-e9ac50c7-da88-470c-ac8d-87313dc61768.PNG" width=31% height="350"/>
+	<img src="https://user-images.githubusercontent.com/61484038/200117759-eac2155f-244b-450f-8bea-bdc2a611d70e.PNG" width=31% height="350"/>
+  <img src="https://user-images.githubusercontent.com/61484038/200117748-6c05ff5a-22c4-4e1a-8039-a257c013e66a.PNG" width=31% height="350"/>
 </div>
 <div align="left">
   <p> (13) 관리자 메인 화면, (14) 관리자 회원 리스트 화면</p>
